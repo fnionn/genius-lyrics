@@ -55,7 +55,9 @@ export default class Song {
             const { data } = await axios.get(this.url, this.config.requestOptions);
             const DOM = htmlparser(data);
             const lyricsDiv = DOM.querySelector(".lyrics");
-            if (!lyricsDiv || !lyricsDiv.text) throw new Error(Constants.NO_RESULT);
+            if (!lyricsDiv || !lyricsDiv.text) {
+                return false;
+            }
 
             let lyrics = lyricsDiv.text.trim();
             if (!lyrics) throw new Error(Constants.NO_RESULT);
